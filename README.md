@@ -87,13 +87,179 @@ Bài Làm:
 
 ![Screenshot (175)](https://github.com/user-attachments/assets/070eeaa9-dc55-4ddc-931c-a769b3ef2257)
 
-- 
+- Trang Set Scripting Options ==> chọn nơi lưu trữ file ==> click next.
 
 ![Screenshot (176)](https://github.com/user-attachments/assets/dea444c7-c82b-413c-9742-53d235c57776)
 
+- Trang summary ==> click next 
+
 ![Screenshot (177)](https://github.com/user-attachments/assets/2a03095c-083a-4889-843f-1cd487eb0f72)
 
+- Trang Save Scripts kiểm tra các bảng của mình tạo ==> Success ==> click finish.
+
 ![Screenshot (178)](https://github.com/user-attachments/assets/8f95cff3-3362-47b8-9493-b13d4e2e0b74)
+
+- Sau khi hoàn tất em được code như dưới đây:
+  USE [QLSV]
+GO
+/****** Object:  Table [dbo].[BoMon]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BoMon](
+	[MaBM] [nchar](10) NOT NULL,
+	[tenBM] [nvarchar](50) NULL,
+	[maKhoa] [nchar](10) NULL,
+ CONSTRAINT [PK_BoMon] PRIMARY KEY CLUSTERED 
+(
+	[MaBM] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[DKMH]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DKMH](
+	[maLopHP] [varchar](30) NOT NULL,
+	[maSV] [varchar](20) NOT NULL,
+	[DiemTP] [float] NULL,
+	[DiemThi] [float] NULL,
+	[PhanTramThi] [float] NULL,
+ CONSTRAINT [PK_DKMH] PRIMARY KEY CLUSTERED 
+(
+	[maLopHP] ASC,
+	[maSV] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[GiaoVien]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[GiaoVien](
+	[magv] [nchar](10) NOT NULL,
+	[hoten] [nvarchar](50) NULL,
+	[NgaySinh] [date] NULL,
+	[maBM] [nchar](10) NULL,
+ CONSTRAINT [PK_GiaoVien] PRIMARY KEY CLUSTERED 
+(
+	[magv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[GVCN]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[GVCN](
+	[maLop] [varchar](15) NOT NULL,
+	[magv] [varchar](15) NOT NULL,
+	[HK] [int] NOT NULL,
+ CONSTRAINT [PK_GVCN] PRIMARY KEY CLUSTERED 
+(
+	[maLop] ASC,
+	[magv] ASC,
+	[HK] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Khoa]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Khoa](
+	[maKhoa] [nchar](10) NOT NULL,
+	[tenKhoa] [nvarchar](30) NULL,
+ CONSTRAINT [PK_Khoa] PRIMARY KEY CLUSTERED 
+(
+	[maKhoa] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Lop]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Lop](
+	[maLop] [char](10) NOT NULL,
+	[tenLop] [nvarchar](30) NULL,
+ CONSTRAINT [PK_Lop] PRIMARY KEY CLUSTERED 
+(
+	[maLop] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LopHP]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LopHP](
+	[maLopHP] [varchar](10) NOT NULL,
+	[Tenmon] [nvarchar](30) NULL,
+	[HK] [int] NULL,
+	[maMon] [varchar](20) NULL,
+	[maGV] [varchar](20) NULL,
+ CONSTRAINT [PK_LopHP] PRIMARY KEY CLUSTERED 
+(
+	[maLopHP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LopSV]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LopSV](
+	[maLop] [varchar](15) NOT NULL,
+	[maSV] [varchar](15) NOT NULL,
+	[ChucVu] [nvarchar](20) NULL,
+ CONSTRAINT [PK_LopSV] PRIMARY KEY CLUSTERED 
+(
+	[maLop] ASC,
+	[maSV] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MonHoc]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MonHoc](
+	[mamon] [nchar](10) NOT NULL,
+	[Tenmon] [nvarchar](50) NULL,
+	[STC] [int] NULL,
+ CONSTRAINT [PK_MonHoc] PRIMARY KEY CLUSTERED 
+(
+	[mamon] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SinhVien]    Script Date: 3/25/2025 6:24:53 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SinhVien](
+	[masv] [nchar](13) NOT NULL,
+	[hoten] [nvarchar](20) NULL,
+	[NgaySinh] [date] NULL,
+ CONSTRAINT [PK_SinhVien] PRIMARY KEY CLUSTERED 
+(
+	[masv] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 
 
 
